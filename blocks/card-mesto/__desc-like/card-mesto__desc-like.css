@@ -3,6 +3,9 @@
     height: 19px;
     cursor: pointer;
 
+    border: 0;
+    background-color: rgba(255, 255, 255, 0);
+
     background-image: url(../../../Images/Heart_disabled.svg);
 }
 

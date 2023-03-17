@@ -21,27 +21,27 @@
           <h2 class="profile__name">Жак-Ив Кусто</h2>
           <p class="profile__about-me">Исследователь океана</p>
         </div>
-        <button class="profile__edit-button"></button>
+        <button class="profile__edit-button" type="button"></button>
       </div>
       <div class="profile__container">
-        <button class="profile__big-button"></button>
+        <button class="profile__big-button" type="button"></button>
       </div>
     </section>
 
     <section class="popup popup_opened">
-      <form class="popup__container">
+      <form class="popup__container" name="profile">
         <div class="popup__close-icon"></div>
         <h2 class="popup__heading">Редактировать профиль</h2>
 
         <div class="popup__edit-value">
           <label for="first-name"></label>
-          <input class="popup__input" type="text" id="first-name" placeholder="Жак-Ив Кусто">
+          <input class="popup__input" type="text" id="first-name" name="name" placeholder="Жак-Ив Кусто">
         </div>
         <div class="popup__edit-value">
           <label for="profession"></label>
-          <input class="popup__input" type="text" id="profession" placeholder="Исследователь океана">
+          <input class="popup__input" type="text" id="profession" name="profession" placeholder="Исследователь океана">
         </div>
-        <button class="button-submit">Сохранить
+        <button class="button-submit" type="submit">Сохранить
         </button>
       </form>
     </section>
@@ -52,7 +52,7 @@
           alt="Сентинский храм в Карачаево-Черкесии">
         <div class="card-mesto__desc">
           <h2 class="card-mesto__desc-header">Карачаевск</h2>
-          <div class="card-mesto__desc-like"></div>
+          <button class="card-mesto__desc-like" type="button"></button>
         </div>
       </div>
       <div class="card-mesto">
@@ -60,14 +60,14 @@
           alt="Поля виноградников, вдалеке виднеется вершина горы Эльбрус">
         <div class="card-mesto__desc">
           <h2 class="card-mesto__desc-header">Гора Эльбрус</h2>
-          <div class="card-mesto__desc-like"></div>
+          <button class="card-mesto__desc-like" type="button"></button>
         </div>
       </div>
       <div class="card-mesto">
         <img class="card-mesto__img" src="./Images/kirill-pershin-1556355-unsplash.jpg" alt=" горная долина Домбай">
         <div class="card-mesto__desc">
           <h2 class="card-mesto__desc-header">Домбай</h2>
-          <div class="card-mesto__desc-like"></div>
+          <button class="card-mesto__desc-like" type="button"></button>
         </div>
       </div>
       <div class="card-mesto">
@@ -75,14 +75,14 @@
           alt="Поля виноградников, вдалеке виднеется вершина горы Эльбрус">
         <div class="card-mesto__desc">
           <h2 class="card-mesto__desc-header">Гора Эльбрус</h2>
-          <div class="card-mesto__desc-like"></div>
+          <button class="card-mesto__desc-like" type="button"></button>
         </div>
       </div>
       <div class="card-mesto">
         <img class="card-mesto__img" src="./Images/kirill-pershin-1556355-unsplash.jpg" alt=" горная долина Домбай">
         <div class="card-mesto__desc">
           <h2 class="card-mesto__desc-header">Домбай</h2>
-          <div class="card-mesto__desc-like"></div>
+          <button class="card-mesto__desc-like" type="button"></button>
         </div>
       </div>
       <div class="card-mesto">
@@ -90,7 +90,7 @@
           alt="Сентинский храм в Карачаево-Черкесии">
         <div class="card-mesto__desc">
           <h2 class="card-mesto__desc-header">Карачаево-Черкетск</h2>
-          <div class="card-mesto__desc-like"></div>
+          <button class="card-mesto__desc-like" type="button"></button>
         </div>
       </div>
     </section>

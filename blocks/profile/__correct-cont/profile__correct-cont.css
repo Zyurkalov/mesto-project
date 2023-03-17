@@ -1,0 +1,6 @@
+/*V нужен чтобы содержимое блока не разьезжалось в колонке, а осталось в одном ряду V*/
+
+.profile__correct-cont {
+    display: flex;
+    justify-content: flex-start;
+}

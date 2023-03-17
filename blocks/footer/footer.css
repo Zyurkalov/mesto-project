@@ -1,0 +1,20 @@
+.footer {
+    margin-left: auto;
+    margin-right: auto;
+    
+    align-self: flex-start;
+    width: 100%;
+    max-width: 880px;
+}
+
+@media screen and (max-width: 915px) {
+    .footer {
+        max-width: 580px;
+    }
+}
+
+@media screen and (max-width: 579px) {
+    .footer {
+        max-width: 282px;
+    }
+}

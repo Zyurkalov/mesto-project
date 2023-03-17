@@ -1,0 +1,16 @@
+.card-mesto__desc-like {
+    width: 22px;
+    height: 19px;
+    cursor: pointer;
+
+    background-image: url(../../../Images/Heart_disabled.svg);
+}
+
+.card-mesto__desc-like:hover {
+    opacity: 0.5;
+}
+
+.card-mesto__desc-like:active {
+    background-image: url(../../../Images/Heart_active.svg);
+    opacity: 1;
+}

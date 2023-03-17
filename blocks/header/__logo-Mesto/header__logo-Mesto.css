@@ -1,0 +1,13 @@
+.logo-Mesto {
+    padding: 45px 19px 31px;
+    max-width: 142px;
+    height: 33px;
+}
+
+@media screen and (max-width: 768px) {
+    .logo-Mesto {
+        margin-left: 27px;
+        width: 103.74px;
+        height: 24.4px;
+    }
+}

@@ -1,17 +1,19 @@
-# Проект: Место
+PROJECT: 'MESTO' - Yandex-Practicum
+https://zyurkalov.github.io/mesto-project/
 
-### Обзор
+Author: Zyurkalov AV
 
-* Figma
-* Картинки
+Used technologies:
+- HTML / CSS:
 
-**Figma**
-
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+- responsive web design
+- flex
+- grid
+- container
+- positioning
+- @import
+- @keyframes
+- @media
+- meta
+- BEM
+- popup

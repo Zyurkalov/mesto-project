@@ -19,5 +19,6 @@
 
     .profile__big-button {
         width: 282px;
+        background-size: 16px;
     }
 }

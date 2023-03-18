@@ -13,7 +13,4 @@
     opacity: 0.5;
 }
 
-.card-mesto__desc-like:active {
-    background-image: url(../../../Images/Heart_active.svg);
-    opacity: 1;
-}
+/*RIP здесь был .card-mesto__desc-like:active RIP*/

@@ -1,6 +1,7 @@
 /*V нужен чтобы содержимое блока не разьезжалось в колонке, а осталось в одном ряду V*/
 
 .profile__correct-cont {
+    padding-bottom: 10px;
     display: flex;
     justify-content: flex-start;
 }

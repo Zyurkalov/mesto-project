@@ -1,5 +1,5 @@
 .button-submit {
-    margin: 28px 0 0 0;
+    margin: 18px 0 0 0;
     padding: 0;
 
     height: 50px;
@@ -27,7 +27,7 @@
     .button-submit {
         height: 46px;
 
-        margin-top: 25px;
+        margin-top: 15px;
         font-size: 14px;
         line-height: 17px;
     }

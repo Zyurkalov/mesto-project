@@ -1,19 +1,14 @@
 .logo-mesto {
-    padding: 45px 19px 41px;
-    max-width: 142px;
+    padding: 45px 0 41px;
+    width: 142px;
     height: 33px;
-
-    background-image: url(../../Images/Mesto.svg);
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 768px) {
     .logo-mesto {
-        padding: 28px 0 31px;
+        padding: 28px 0 31.6px;
         margin-left: 27px;
-        
+
         width: 103.74px;
         height: 24.4px;
     }

@@ -1,19 +1,19 @@
 .popup__input {
-    margin: 0px;
-    /*margin-bottom: 30px;
-    padding-bottom: 11px;*/
+    margin: 0 0 20px;
+    padding: 0 0 12px;
 
     width: 100%;
+    box-sizing: border-box;
+
     outline: 0;
     border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
 }
 
 .popup__input::placeholder {
     color: rgba(0, 0, 0, 1);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 27px;
-
-   /* padding-bottom: 10px;*/
-    /*border-bottom: 1px solid rgba(0, 0, 0, .2);*/
 }

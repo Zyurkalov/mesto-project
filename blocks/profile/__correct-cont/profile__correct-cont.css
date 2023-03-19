@@ -5,3 +5,9 @@
     display: flex;
     justify-content: flex-start;
 }
+
+@media screen and (max-width: 768px) {
+    .profile__correct-cont {
+        padding-bottom: 0;
+    }
+}

@@ -13,6 +13,7 @@
 
 .profile__big-button:hover {
     opacity: .6;
+    transition: opacity 0.15s linear;
 }
 
 @media screen and (max-width: 768px) {

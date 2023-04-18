@@ -29,6 +29,8 @@
 @import url(../blocks/card-mesto/__desc/card-mesto__desc.css);
 @import url(../blocks/card-mesto/__desc-header/card-mesto__desc-header.css);
 @import url(../blocks/card-mesto/__desc-like/card-mesto__desc-like.css);
+@import url(../blocks/card-mesto/__desc-like/card-mesto__desc-like_active.css);
+@import url(../blocks/card-mesto/__trash/card-mesto__trash.css);
 
 /*popup*/
 @import url(../blocks/popup/popup.css);
@@ -43,3 +45,13 @@
 /*footer*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+
+@import url(../blocks/popup/__container-img/popup__container-img.css);
+@import url(../blocks/popup/__caption/popup__caption.css);
+@import url(../blocks/popup/__img/popup__popup__img.css);
+
+
+
+
+

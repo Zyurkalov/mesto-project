@@ -4,7 +4,7 @@ https://zyurkalov.github.io/mesto-project/
 Author: Zyurkalov AV
 
 Used technologies:
-- HTML / CSS:
+- HTML / CSS / JS:
 
 - responsive web design
 - flex

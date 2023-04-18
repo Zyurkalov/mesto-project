@@ -1,0 +1,17 @@
+.card-mesto__trash {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    
+    cursor: pointer;
+    width: 18px;
+    height: 19px;
+    background-image: url(../../../Images/Trash.svg);
+}
+.card-mesto__trash:hover {
+    opacity: 0.5;
+    transition: opacity 0.15s linear;
+}
+.card-mesto__trash:hover ~ .card-mesto__img {
+    opacity: 0.8;
+} 

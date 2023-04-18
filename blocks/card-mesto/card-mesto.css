@@ -1,6 +1,12 @@
 .card-mesto {
     margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     
-    background-color: #fff;
+    max-width: 282px;
+    max-height: 361px;
+    
+    background: rgba(255,255,255,1);
     border-radius: 10px;
 }

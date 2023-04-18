@@ -11,6 +11,8 @@
 
 .card-mesto__desc-like:hover {
     opacity: 0.5;
+    transition: opacity 0.15s linear;
 }
 
 /*RIP здесь был .card-mesto__desc-like:active RIP*/
+

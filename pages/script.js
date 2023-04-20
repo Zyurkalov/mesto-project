@@ -80,7 +80,10 @@ function addCard(card, firstOrder) {
 
 function submitAddCardForm(evt) {
   evt.preventDefault();
-  // place и image перезаписываются, const выдаст ошибку.
+  /* place и image перезаписываются, const выдаст ошибку. Можно конечно просто сделать проверку
+  чтобы карточка не создавалась при пустых значениях, тогда не их надо перезаписывать но 
+  может оставим немного уникальности проекту? :) */
+  // тем более переменные объявлены только внутри функции и не влияют на окружение.
   let place = placeInputPopupAddCard.value;
   let image = imageInputPopupAddCard.value;
   const firstOrder = true;

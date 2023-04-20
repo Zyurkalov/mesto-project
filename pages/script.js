@@ -1,12 +1,17 @@
 
 const popupViewImg = document.querySelector('#popup-img');
+const popupImageValueImg = popupViewImg.querySelector('.popup__img')
+const popupImageValueText = popupViewImg.querySelector('.popup__caption')
+
 const popupProfile = document.querySelector('#popup-profile');
 const nameInput = popupProfile.querySelector('#first-name');
 const jobInput = popupProfile.querySelector('#prof');
+
 const popupAddOneCard = document.querySelector('#popup-newCard');
 const placeInput = popupAddOneCard.querySelector('#place');
 const imageInput = popupAddOneCard.querySelector('#image');
-
+const placeInputPopupAddCard = popupAddOneCard.querySelector('#place');
+const imageInputPopupAddCard = popupAddOneCard.querySelector('#image');
 const namePlaceholder = document.querySelector('.profile__name');
 const jobPlaceholde = document.querySelector('.profile__about-me');
 
@@ -27,13 +32,11 @@ function togglePopup(namePopup) {
 };
 
 function resetValue() {
-  const nameInput = popupAddOneCard.querySelector('#place');
-  const jobInput = popupAddOneCard.querySelector('#image');
-  nameInput.value = ''; 
-  jobInput.value = '';
+  placeInput.value = ''; 
+  imageInput.value = '';
 };
 
-function popupProfileFormSubmit(evt) {
+function submitEditProfileForm(evt) {
   evt.preventDefault();
   if (!nameInput.value == '' && !jobInput.value == '') {
     const nameValue = nameInput.value;
@@ -44,7 +47,7 @@ function popupProfileFormSubmit(evt) {
     };
 };
 
-function addOneCard(place, image, firstOrder) {
+function createCard(place, image) {
   const templateCard = cardContent.querySelector('.card-mesto');
   const copiedCard = templateCard.cloneNode(true);
 
@@ -53,8 +56,8 @@ function addOneCard(place, image, firstOrder) {
   const imageCard = copiedCard.querySelector('.card-mesto__img');
 
   copiedCard.querySelector('.card-mesto__desc-header').textContent = place;
-  copiedCard.querySelector('.card-mesto__img').alt = place;
-  copiedCard.querySelector('.card-mesto__img').src = image;
+  imageCard.alt = place;
+  imageCard.src = image;
 
   likeCard.addEventListener('click', function (evt) {
     evt.target.classList.toggle('card-mesto__desc-like_active')
@@ -63,29 +66,34 @@ function addOneCard(place, image, firstOrder) {
     copiedCard.remove(evt.target.parentElement.parentElement);
   });
   imageCard.addEventListener('click', function () {
-    popupViewImg.classList.add('popup_opened')
-    popupViewImg.querySelector('.popup__img').src = image;
-    popupViewImg.querySelector('.popup__img').alt = place;
-    popupViewImg.querySelector('.popup__caption').textContent = place;
+    popupViewImg.classList.toggle('popup_opened')
+    popupImageValueImg.src = image;
+    popupImageValueImg.alt = place;
+    popupImageValueText.textContent = place;
   });
-  firstOrder === false ? photoGrid.append(copiedCard) : photoGrid.prepend(copiedCard);
+  return copiedCard
 };
 
-function byUserAddCard(evt) {
+function addCard(card, firstOrder) {
+  firstOrder === false ? photoGrid.append(card) : photoGrid.prepend(card);
+}
+
+function submitAddCardForm(evt) {
   evt.preventDefault();
-  let place = placeInput.value;
-  let image = imageInput.value;
+  // place и image перезаписываются, const выдаст ошибку.
+  let place = placeInputPopupAddCard.value;
+  let image = imageInputPopupAddCard.value;
   const firstOrder = true;
-  
-  if (placeInput.value === '') {
+
+  if (placeInputPopupAddCard.value === '') {
     place  = 'В поиске места';
   }
-  if (imageInput.value == '') {
+  if (imageInputPopupAddCard.value === '') {
     image ='./Images/landscape.svg';
     // авторские права соблюдены 
   };
-
-  addOneCard(place, image, firstOrder)
+  const card= createCard(place, image)
+  addCard(card, firstOrder)
   togglePopup(popupAddOneCard);
 };
 
@@ -93,7 +101,8 @@ initialCards.forEach(function (valueArray) {
   const place = valueArray.name
   const image = valueArray.link;
   const firstOrder = false;
-  addOneCard(place, image, firstOrder)
+  const card= createCard(place, image)
+  addCard(card, firstOrder)
 });
 
 popupProfileOpen.addEventListener('click', function () {
@@ -118,7 +127,7 @@ popupViewImgClose.addEventListener('click', function () {
   togglePopup(popupViewImg);
 });
 
-popupProfile.addEventListener('submit', popupProfileFormSubmit);
-popupAddOneCardSave.addEventListener('click', byUserAddCard);
+popupProfile.addEventListener('submit', submitEditProfileForm);
+popupAddOneCard.addEventListener('submit', submitAddCardForm);
 
 

@@ -1,0 +1,10 @@
+.button-submit_active {
+    background-color: rgba(0, 0, 0, 1);
+    color: #fff;
+    border-style: none;
+    cursor: pointer;
+}
+
+.button-submit_active:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Место</title>
+  <link rel="stylesheet" href="./components/index.css">
+</head>
+
+<body class="body">
+  <header class="header" aria-label="Логотип">
+    <img class="logo-mesto" src="./Images/Mesto.svg" alt="Логотип">
+  </header>
+
+  <main class="main">
+    <section class="profile">
+      <img class="profile__avatar" src="./Images/Yuri_Gagarin.svg" alt="Аватар">
+      <div class="profile__correct-cont">
+        <div class="profile__profile-info">
+          <h1 class="profile__name">Юрий Гагарин</h1>
+          <p class="profile__about-me">Космонавт, лётчик-испытатель</p>
+        </div>
+        <button class="profile__edit-button" type="button"></button>
+      </div>
+      <div class="profile__container">
+        <button class="profile__big-button" type="button"></button>
+      </div>
+    </section>
+
+    <section class="photo-grid" aria-label="Карточки">
+      
+    </section>
+
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&COPY; 2023 Mesto Russia</p>
+  </footer>
+
+  <section class="popup" id="popup-profile">
+    <div class="popup__container">
+      <button class="popup__close-icon" type="button"></button>
+      <h2 class="popup__heading">Редактировать профиль</h2>
+
+      <form class="popup__edit-value" name="profile" novalidate>
+        <label class="popup__field">
+          <input class="popup__input" type="text" id="first-name" name="name" placeholder="Имя" 
+          pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" minlength="2" maxlength="40" 
+          data-error-message = "Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
+          required>
+          <span class="first-name-span-error popup__span-error"></span>
+        </label>
+        <label class="popup__field">
+          <input class="popup__input" type="text" id="prof" name="profession" placeholder="Вид деятельности" 
+          pattern="^[a-zA-Zа-яА-ЯёЁ\-\s]+$" minlength="2" maxlength="200" 
+          data-error-message = "Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+          required>
+          <span class="prof-span-error popup__span-error"></span>
+        </label>
+        <button class="button-submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup" id="popup-newCard">
+    <div class="popup__container">
+      <button class="popup__close-icon" type="button"></button>
+      <h2 class="popup__heading">Новое место</h2>
+
+      <form class="popup__edit-value" id ="reset" name="card" novalidate>
+        <label class="popup__field">
+          <input class="popup__input" type="text" id="place" name="name" placeholder="Название" 
+          pattern="^[a-zA-Zа-яА-ЯёЁ\s\-]+$" minlength="2" maxlength="30" 
+          data-error-message = "Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
+          required>
+          <span class="place-span-error popup__span-error"></span>
+        </label>
+        <label class="popup__field">
+          <input class="popup__input" type="url" id="image" name="image" placeholder="Ссылка на картинку" required>
+          <span class="image-span-error popup__span-error test"></span>
+        </label>
+        <button class="button-submit" type="submit">Создать</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup" id="popup-img">
+    <div class=" popup__container-img">
+      <button class="popup__close-icon" type="button"></button>
+      <img class="popup__img" alt="" src="">
+      <h2 class="popup__caption"></h2>
+    </div>  
+  </section>
+
+  <template id="card">
+    <div class="card-mesto">
+      <img class="card-mesto__img" src='./Images/landscape.svg' alt='Заглушка'>
+      <botton class="card-mesto__trash"></botton>
+      <div class="card-mesto__desc">
+          <h2 class="card-mesto__desc-header"></h2>
+          <button class="card-mesto__desc-like" type="button"></button>
+      </div>
+    </div>
+  </template>
+  <!-- <script  src="./pages/constants.js"></script> -->
+  <script type="module" src="./components/script.js"></script>
+</body>
+
+</html>

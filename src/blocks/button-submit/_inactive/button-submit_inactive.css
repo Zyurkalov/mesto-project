@@ -1,0 +1,6 @@
+.button-submit_inactive {
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.2);
+    border: solid 2px rgba(0, 0, 0, 0.2);
+    cursor: default;
+}

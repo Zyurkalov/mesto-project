@@ -7,13 +7,11 @@ Used technologies:
 - HTML / CSS / JS:
 
 - responsive web design
-- flex
-- grid
-- container
 - positioning
 - @import
 - @keyframes
 - @media
 - meta
 - BEM
-- popup
+- modules
+- UX

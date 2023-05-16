@@ -1,4 +1,4 @@
-import { checkImage, loadCallback, errorCallback, togglePopup } from './utils.js'
+import { checkImage, loadCallback, errorCallback, openPopup, closePopup} from '../components/utils.js'
 
 const initialCards = [
   {
@@ -26,8 +26,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   },
 ];
-//const body = document.querySelector('body')
-//const popup = Array.from(document.querySelectorAll('.popup'))
 const photoGrid = document.querySelector('.photo-grid');
 const cardContent = document.querySelector('#card').content;
 const templateCard = cardContent.querySelector('.card-mesto');
@@ -36,34 +34,33 @@ const popupImageValueImg = popupViewImg.querySelector('.popup__img')
 const popupImageValueText = popupViewImg.querySelector('.popup__caption')
 const popupAddOneCard = document.querySelector('#popup-newCard');
 const imageInput = popupAddOneCard.querySelector('#image');
+const submitOneCard = popupAddOneCard.querySelector('.button-submit')
+
 
 function createCard(place, image) {
   const copiedCard = templateCard.cloneNode(true);
 
+  const buttonLike = copiedCard.querySelector('.card-mesto__desc-like');
+  const buttonTrash = copiedCard.querySelector('.card-mesto__trash');
   const imageCard = copiedCard.querySelector('.card-mesto__img');
+
   copiedCard.querySelector('.card-mesto__desc-header').textContent = place;
   imageCard.alt = place;
   imageCard.src = image;
 
-  copiedCard.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('card-mesto__desc-like')) {
+  buttonLike.addEventListener('click', function (evt) {
       evt.target.classList.toggle('card-mesto__desc-like_active')
-    }
+    });
 
+  buttonTrash.addEventListener('click', function (evt) {
+      copiedCard.remove(evt.target.closest('#card'));
   });
-  copiedCard.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('card-mesto__trash')) {
-      copiedCard.remove(evt.target.parentElement.parentElement);
-    }
-  });
-  copiedCard.addEventListener('click', function (evt) {
-    if (evt.target.classList.contains('card-mesto__img')) {
-      togglePopup(popupViewImg)
+  imageCard.addEventListener('click', function (evt) {
+    openPopup(popupViewImg)
       popupImageValueImg.src = image;
       popupImageValueImg.alt = place;
       popupImageValueText.textContent = place;
-    };
-  });
+});
   return copiedCard
 };
 
@@ -81,7 +78,10 @@ const creationCard = initialCards.forEach(function (valueArray) {
 function submitAddCardForm(evt) {
   evt.preventDefault();
   checkImage(imageInput.value, loadCallback, errorCallback)
-  togglePopup(popupAddOneCard);
+  closePopup(popupAddOneCard);
+  //////
+  submitOneCard.classList.add('button-submit_inactive');
+  submitOneCard.classList.remove('button-submit_active');
 };
 
 export { creationCard, createCard, addCard, submitAddCardForm, imageInput }

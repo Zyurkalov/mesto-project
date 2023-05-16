@@ -1,9 +1,11 @@
-import { closePopupEvtEsc, closePopupEvtClick } from './modal.js'
-import { createCard, addCard, imageInput } from './card.js'
+import { closePopupEvtEsc, closePopupEvtClick } from '../components/modal.js'
+import { createCard, addCard, imageInput } from '../components/card.js'
 
+const imgLandscape = new URL('../Images/landscape.svg', import.meta.url);
 const popupAddOneCard = document.querySelector('#popup-newCard');
 const placeInput = popupAddOneCard.querySelector('#place');
 const body = document.querySelector('body')
+
 
 function checkImage(url, imageFound, imageNotFound) {
   const tester = new Image();
@@ -22,7 +24,7 @@ function loadCallback() {
 }
 
 function errorCallback() {
-  const image = './Images/landscape.svg'
+  const image = imgLandscape;
   const place = placeInput.value;
   const firstOrder = true;
 
@@ -30,16 +32,23 @@ function errorCallback() {
   addCard(card, firstOrder)
 }
 
-function togglePopup(namePopup) {
-  if (!namePopup.classList.contains('popup_opened')) {
-    namePopup.classList.add('popup_opened');
-    body.addEventListener('keydown', closePopupEvtEsc)
-    body.addEventListener('click', closePopupEvtClick)
-  } else {
-    namePopup.classList.remove('popup_opened');
-    body.removeEventListener('keydown', closePopupEvtEsc)
-    body.removeEventListener('click', closePopupEvtClick)
-  }
-};
+function openPopup(namePopup) {
+  namePopup.classList.add('popup_opened');
+  body.addEventListener('keydown', closePopupEvtEsc)
+  body.addEventListener('click', closePopupEvtClick)
+}
 
-export { checkImage, loadCallback, errorCallback, togglePopup }
+function closePopup(namePopup) {
+  namePopup.classList.remove('popup_opened');
+  body.removeEventListener('keydown', closePopupEvtEsc)
+  body.removeEventListener('click', closePopupEvtClick)
+}
+
+function disableButton(namePopup) {
+  const buttonElement = namePopup.querySelector('.button-submit')
+  buttonElement.disabled = true;
+  buttonElement.classList.add('button-submit_inactive');
+  buttonElement.classList.remove('button-submit_active');
+}
+export { checkImage, loadCallback, errorCallback, openPopup, closePopup, disableButton }
+

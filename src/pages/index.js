@@ -1,15 +1,15 @@
 import './index.css';
 import { submitAddCardForm } from '../components/card.js'
-import { enableValidation } from '../components/validate.js'
-import { openPopup, closePopup, disableButton } from '../components/utils.js'
+import { enableValidation, disableButton } from '../components/validate.js'
+import { openPopup, closePopup,  } from '../components/utils.js'
 import { submitEditProfileForm } from '../components/modal.js'
 
 const formsCards = document.forms.card;
 const formsProfile = document.forms.profile;
 
 const profile = document.querySelector('.profile');
-const NameFormProfile = profile.querySelector('.profile__name')
-const AboutFormProfile = profile.querySelector('.profile__about-me')
+const nameFormProfile = profile.querySelector('.profile__name')
+const aboutFormProfile = profile.querySelector('.profile__about-me')
 
 const popupProfile = document.querySelector('#popup-profile');
 const nameInput = popupProfile.querySelector('#first-name');
@@ -25,15 +25,16 @@ const popupAddOneCardSub = popupAddOneCard.querySelector('.button-submit');
 const popupViewImg = document.querySelector('#popup-img');
 const popupViewImgClose = popupViewImg.querySelector('.popup__close-icon');
 
+
 popupProfile.addEventListener('submit', submitEditProfileForm);
 popupAddOneCard.addEventListener('submit', submitAddCardForm);
 
-popupProfileOpen.addEventListener('click', function () {
-  nameInput.value = NameFormProfile.textContent
-  jobInput.value = AboutFormProfile.textContent
-  disableButton(popupProfileSave)
-  openPopup(popupProfile);
 
+popupProfileOpen.addEventListener('click', function () {
+  disableButton(popupProfileSave, 'button-submit_inactive', 'button-submit_active')
+  nameInput.value = nameFormProfile.textContent
+  jobInput.value = aboutFormProfile.textContent
+  openPopup(popupProfile);
 });
 popupProfileClose.addEventListener('click', function () {
   closePopup(popupProfile);
@@ -41,12 +42,12 @@ popupProfileClose.addEventListener('click', function () {
 popupProfileSave.addEventListener('click', function () {
   if (!nameInput.value == '' && !jobInput.value == '') {
     closePopup(popupProfile);
-    //disableButton(popupProfile)
   }
 });
+
 popupAddOneCardOpen.addEventListener('click', function () {
+  disableButton(popupAddOneCardSub, 'button-submit_inactive', 'button-submit_active')
   formsCards.reset();
-  disableButton(popupAddOneCardSub)
   openPopup(popupAddOneCard);
 });
 popupAddOneCardClose.addEventListener('click', function () {

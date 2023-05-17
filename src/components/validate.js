@@ -1,5 +1,4 @@
-import {disableButton, activeButton} from './utils.js'
-disableButton, activeButton
+
 function showInputError(formElement, inputElement, errorMessage, { inputSelectorError }) {
   const formError = formElement.querySelector(`.${inputElement.id}-span-error`)
   inputElement.classList.add(inputSelectorError);
@@ -27,25 +26,28 @@ function checkInputValidity(formElement, inputElement, { ...rest }) {
     hideInputError(formElement, inputElement, rest);
   }
 };
-
+////
+function disableButton(buttonSubElement, inactiveClass, activeClass) {
+  buttonSubElement.disabled = true;
+  buttonSubElement.classList.add(inactiveClass);
+  buttonSubElement.classList.remove(activeClass);
+}
+function activeButton(buttonSubElement, inactiveClass, activeClass) {
+  buttonSubElement.disabled = false;
+  buttonSubElement.classList.remove(inactiveClass);
+  buttonSubElement.classList.add(activeClass);
+}
+////
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass, activeButtonClass) {
   if (hasInvalidInput(inputList)) {
     disableButton(buttonElement, inactiveButtonClass, activeButtonClass)
-    //buttonElement.disabled = true;
-    //buttonElement.classList.add(inactiveButtonClass);
-    //buttonElement.classList.remove(activeButtonClass);
   } else {
     activeButton(buttonElement, inactiveButtonClass, activeButtonClass)
-    //buttonElement.disabled = false;
-    //buttonElement.classList.remove(inactiveButtonClass);
-    //buttonElement.classList.add(activeButtonClass);
   }
 }
 function setEventListeners(formElement, { inputSelector, submitButtonSelector, inactiveButtonClass, activeButtonClass, ...rest }) {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
-
-  //toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     ////
     inputElement.addEventListener('input', function () {

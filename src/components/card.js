@@ -1,5 +1,6 @@
-import { checkImage, loadCallback, errorCallback, openPopup, closePopup, disableButton} from './utils.js'
+import { checkImage, loadCallback, errorCallback, openPopup, closePopup} from './utils.js'
 import {initialCards} from './constants.js'
+import {disableButton} from './validate.js'
 
 const photoGrid = document.querySelector('.photo-grid');
 const cardContent = document.querySelector('#card').content;

@@ -43,22 +43,10 @@ function closePopup(namePopup) {
   body.removeEventListener('keydown', closePopupEvtEsc)
   body.removeEventListener('click', closePopupEvtClick)
 }
-function disableButton(buttonSubElement, inactiveClass ='button-submit_inactive', activeClass ='button-submit_active') {
+/*function disableButton(buttonSubElement, inactiveClass, activeClass) {
   buttonSubElement.disabled = true;
   buttonSubElement.classList.add(inactiveClass);
   buttonSubElement.classList.remove(activeClass);
-}
-/*function disableButton(namePopup) {
-  const buttonElement = namePopup.querySelector('.button-submit')
-  buttonElement.disabled = true;
-  buttonElement.classList.add('button-submit_inactive');
-  buttonElement.classList.remove('button-submit_active');
 }*/
-function activeButton(buttonSubElement, inactiveClass ='button-submit_inactive', activeClass ='button-submit_active') {
-  buttonSubElement.disabled = false;
-  buttonSubElement.classList.remove(inactiveClass);
-  buttonSubElement.classList.add(activeClass);
-}
-
-export { checkImage, loadCallback, errorCallback, openPopup, closePopup, disableButton, activeButton }
+export {checkImage, loadCallback, errorCallback, openPopup, closePopup}
 

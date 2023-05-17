@@ -1,5 +1,5 @@
-import { closePopupEvtEsc, closePopupEvtClick } from '../components/modal.js'
-import { createCard, addCard, imageInput } from '../components/card.js'
+import { closePopupEvtEsc, closePopupEvtClick } from './modal.js'
+import { createCard, addCard, imageInput } from './card.js'
 
 const imgLandscape = new URL('../Images/landscape.svg', import.meta.url);
 const popupAddOneCard = document.querySelector('#popup-newCard');
@@ -43,12 +43,22 @@ function closePopup(namePopup) {
   body.removeEventListener('keydown', closePopupEvtEsc)
   body.removeEventListener('click', closePopupEvtClick)
 }
-
-function disableButton(namePopup) {
+function disableButton(buttonSubElement, inactiveClass ='button-submit_inactive', activeClass ='button-submit_active') {
+  buttonSubElement.disabled = true;
+  buttonSubElement.classList.add(inactiveClass);
+  buttonSubElement.classList.remove(activeClass);
+}
+/*function disableButton(namePopup) {
   const buttonElement = namePopup.querySelector('.button-submit')
   buttonElement.disabled = true;
   buttonElement.classList.add('button-submit_inactive');
   buttonElement.classList.remove('button-submit_active');
+}*/
+function activeButton(buttonSubElement, inactiveClass ='button-submit_inactive', activeClass ='button-submit_active') {
+  buttonSubElement.disabled = false;
+  buttonSubElement.classList.remove(inactiveClass);
+  buttonSubElement.classList.add(activeClass);
 }
-export { checkImage, loadCallback, errorCallback, openPopup, closePopup, disableButton }
+
+export { checkImage, loadCallback, errorCallback, openPopup, closePopup, disableButton, activeButton }
 

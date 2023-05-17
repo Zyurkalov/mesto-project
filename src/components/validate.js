@@ -1,13 +1,13 @@
+import {disableButton, activeButton} from './utils.js'
+disableButton, activeButton
 function showInputError(formElement, inputElement, errorMessage, { inputSelectorError }) {
   const formError = formElement.querySelector(`.${inputElement.id}-span-error`)
   inputElement.classList.add(inputSelectorError);
-  //formError.classList.remove('popup__span-error_hide');
   formError.textContent = errorMessage;
 }
 function hideInputError(formElement, inputElement, { inputSelectorError }) {
   const formError = formElement.querySelector(`.${inputElement.id}-span-error`)
   inputElement.classList.remove(inputSelectorError);
-  //formError.classList.add('popup__span-error_hide');
   formError.textContent = ''
 }
 
@@ -30,20 +30,22 @@ function checkInputValidity(formElement, inputElement, { ...rest }) {
 
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass, activeButtonClass) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.classList.remove(activeButtonClass);
+    disableButton(buttonElement, inactiveButtonClass, activeButtonClass)
+    //buttonElement.disabled = true;
+    //buttonElement.classList.add(inactiveButtonClass);
+    //buttonElement.classList.remove(activeButtonClass);
   } else {
-    buttonElement.disabled = false;
-    buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.classList.add(activeButtonClass);
+    activeButton(buttonElement, inactiveButtonClass, activeButtonClass)
+    //buttonElement.disabled = false;
+    //buttonElement.classList.remove(inactiveButtonClass);
+    //buttonElement.classList.add(activeButtonClass);
   }
 }
 function setEventListeners(formElement, { inputSelector, submitButtonSelector, inactiveButtonClass, activeButtonClass, ...rest }) {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
 
-  toggleButtonState(inputList, buttonElement);
+  //toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     ////
     inputElement.addEventListener('input', function () {
@@ -65,4 +67,4 @@ function hasInvalidInput(inputList) {
     return !inputElement.validity.valid;
   });
 };
-export { enableValidation, setEventListeners, toggleButtonState }
+export { enableValidation, setEventListeners, toggleButtonState , disableButton}

@@ -1,31 +1,6 @@
-import { checkImage, loadCallback, errorCallback, openPopup, closePopup} from '../components/utils.js'
+import { checkImage, loadCallback, errorCallback, openPopup, closePopup, disableButton} from './utils.js'
+import {initialCards} from './constants.js'
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  },
-];
 const photoGrid = document.querySelector('.photo-grid');
 const cardContent = document.querySelector('#card').content;
 const templateCard = cardContent.querySelector('.card-mesto');
@@ -53,7 +28,7 @@ function createCard(place, image) {
     });
 
   buttonTrash.addEventListener('click', function (evt) {
-      copiedCard.remove(evt.target.closest('#card'));
+      copiedCard.remove();
   });
   imageCard.addEventListener('click', function (evt) {
     openPopup(popupViewImg)
@@ -77,11 +52,11 @@ const creationCard = initialCards.forEach(function (valueArray) {
 
 function submitAddCardForm(evt) {
   evt.preventDefault();
-  checkImage(imageInput.value, loadCallback, errorCallback)
   closePopup(popupAddOneCard);
-  //////
-  submitOneCard.classList.add('button-submit_inactive');
-  submitOneCard.classList.remove('button-submit_active');
+  disableButton(submitOneCard)
+  //submitOneCard.classList.add('button-submit_inactive');
+  //submitOneCard.classList.remove('button-submit_active');
+  checkImage(imageInput.value, loadCallback, errorCallback)
 };
 
 export { creationCard, createCard, addCard, submitAddCardForm, imageInput }

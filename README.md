@@ -15,3 +15,4 @@ Used technologies:
 - BEM
 - modules
 - UX
+- Webpack

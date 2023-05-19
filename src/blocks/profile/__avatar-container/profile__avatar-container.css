@@ -1,0 +1,16 @@
+.profile__avatar-container {
+    min-width: 120px;
+    aspect-ratio: 1;
+    position: relative;
+    display: flex;
+}
+.profile__avatar-container:hover .profile__avatar {
+    cursor: pointer;
+    filter: brightness(0.2);
+    transition: filter 0.20s ease-out;
+}
+.profile__avatar-container:hover .profile__edit-avatar  {
+    opacity: 1;
+    transition: opacity 0.30s ease-out;
+}
+

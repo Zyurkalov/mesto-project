@@ -7,5 +7,5 @@
     display: flex;
     justify-content: space-between;
     -ms-flex-align: end;
-    align-items: center;
+    /*align-items: center;*/
 }

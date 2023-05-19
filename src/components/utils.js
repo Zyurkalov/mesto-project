@@ -49,4 +49,3 @@ function closePopup(namePopup) {
   buttonSubElement.classList.remove(activeClass);
 }*/
 export {checkImage, loadCallback, errorCallback, openPopup, closePopup}
-

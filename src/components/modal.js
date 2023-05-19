@@ -1,11 +1,17 @@
 import {closePopup} from './utils.js'
+import {updateUserName, updateAvatar} from './api.js'
 
 const popup = Array.from(document.querySelectorAll('.popup'))
 const popupProfile = document.querySelector('#popup-profile');
 const nameInput = popupProfile.querySelector('#first-name');
 const jobInput = popupProfile.querySelector('#prof');
-const namePlaceholder = document.querySelector('.profile__name');
-const jobPlaceholder = document.querySelector('.profile__about-me');
+const profile = document.querySelector('.profile');
+const userAvatar = profile.querySelector('.profile__avatar')
+const namePlaceholder = profile.querySelector('.profile__name');
+const jobPlaceholder = profile.querySelector('.profile__about-me');
+const popupAvatar = document.querySelector('#popup-avatar');
+const avatarInput = popupAvatar.querySelector('#image');
+
 
 function closePopupEvtEsc(evt) {
   if (evt.key === 'Escape') {
@@ -24,10 +30,20 @@ function closePopupEvtClick(evt) {
 
 function submitEditProfileForm(evt) {
   evt.preventDefault();
-    const nameValue = nameInput.value;
-    const jobValue = jobInput.value;
-    namePlaceholder.textContent = nameValue; //новое значение
-    jobPlaceholder.textContent = jobValue;   //новое значение
+  const { name, about } = evt.target.elements;
+  console.log(evt.target.elements)
+  console.log({ name, about })
+  updateUserName({
+    name: name.value,
+    about: about.value,
+  })
 };
+function submitNewAvatar(evt) {
+  evt.preventDefault();
 
-export { closePopupEvtEsc, closePopupEvtClick, submitEditProfileForm,}
+  const {avatar} = evt.target.elements;
+  console.log({avatar})
+  updateAvatar({
+  avatar: avatar.value})
+} 
+export { closePopupEvtEsc, closePopupEvtClick, submitEditProfileForm, submitNewAvatar}

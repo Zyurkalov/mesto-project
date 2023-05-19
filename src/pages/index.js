@@ -1,15 +1,18 @@
 import './index.css';
+import { } from '../components/api.js'
 import { submitAddCardForm } from '../components/card.js'
 import { enableValidation, disableButton } from '../components/validate.js'
 import { openPopup, closePopup,  } from '../components/utils.js'
-import { submitEditProfileForm } from '../components/modal.js'
+import { submitEditProfileForm, submitNewAvatar } from '../components/modal.js'
 
 const formsCards = document.forms.card;
 const formsProfile = document.forms.profile;
+const formAvatar = document.forms.avatar;
 
 const profile = document.querySelector('.profile');
 const nameFormProfile = profile.querySelector('.profile__name')
 const aboutFormProfile = profile.querySelector('.profile__about-me')
+
 
 const popupProfile = document.querySelector('#popup-profile');
 const nameInput = popupProfile.querySelector('#first-name');
@@ -25,10 +28,16 @@ const popupAddOneCardSub = popupAddOneCard.querySelector('.button-submit');
 const popupViewImg = document.querySelector('#popup-img');
 const popupViewImgClose = popupViewImg.querySelector('.popup__close-icon');
 
+const popupAvatar = document.querySelector('#popup-avatar');
+const popupAvatarBtn = popupAvatar.querySelector('.button-submit')
+const popupAvatarClose = popupAvatar.querySelector('.popup__close-icon')
+const avatar = profile.querySelector('.profile__avatar')
+const avatarInput = popupAvatar.querySelector('#image');
+
 
 popupProfile.addEventListener('submit', submitEditProfileForm);
 popupAddOneCard.addEventListener('submit', submitAddCardForm);
-
+popupAvatar.addEventListener('submit', submitNewAvatar);
 
 popupProfileOpen.addEventListener('click', function () {
   disableButton(popupProfileSave, 'button-submit_inactive', 'button-submit_active')
@@ -56,6 +65,19 @@ popupAddOneCardClose.addEventListener('click', function () {
 });
 popupViewImgClose.addEventListener('click', function () {
   closePopup(popupViewImg);
+});
+
+avatar.addEventListener('click', function () {
+  disableButton(popupAvatarBtn, 'button-submit_inactive', 'button-submit_active')
+  //formAvatar.reset();
+  openPopup(popupAvatar);
+});
+popupAvatarBtn.addEventListener('click', function(){
+  closePopup(popupAvatar);
+})
+
+popupAvatarClose.addEventListener('click', function () {
+  closePopup(popupAvatar);
 });
 
 enableValidation({

@@ -57,9 +57,20 @@
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
 
+@import url(../blocks/profile/__avatar-container/profile__avatar-container.css);
+@import url(../blocks/profile/__edit-avatar/profile__edit-avatar.css);
 
-
-
-
-
-
+.popup__container_sizeM {
+    min-height: 272px;
+}
+.card-mesto__like-count {
+margin: 0;
+padding: 0;
+text-align: center;
+}
+.card-mesto__like-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}

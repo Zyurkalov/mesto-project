@@ -1,8 +1,8 @@
 import './index.css';
-import { requestUser, requestCards, checkRes, myId} from '../components/api.js'
+import { requestUser, requestCards, checkRes, myId } from '../components/api.js'
 import { submitAddCardForm, createCard, addCard } from '../components/card.js'
 import { enableValidation, disableButton } from '../components/validate.js'
-import { openPopup, closePopup,  } from '../components/utils.js'
+import { openPopup, closePopup, } from '../components/utils.js'
 import { submitEditProfileForm, submitNewAvatar } from '../components/modal.js'
 
 let userId
@@ -41,48 +41,27 @@ const namePlaceholder = profile.querySelector('.profile__name');
 const jobPlaceholder = profile.querySelector('.profile__about-me');
 const userAvatar = profile.querySelector('.profile__avatar')
 
-/*
-requestUser()
-.then((res) => checkRes(res))
-  .then((user) => {
-    //console.log(user._id)
-    namePlaceholder.textContent = user.name; //новое значение
-    jobPlaceholder.textContent = user.about;   //новое значение
-    userAvatar.src = user.avatar
-  })
-  
-requestCards()
-.then((res) => checkRes(res))
-    .then((res) => { 
-      res.forEach((data) => { 
-        //console.log(data.likes.length)
-        const firstOrder = false;
-        const card = createCard(data.name, data.link, data.likes, data._id, data.owner)
-        //if (data.owner._id !== userId) {
-        //  card.children[1].hidden = true
-        //}
-        addCard(card, firstOrder)
-        //console.dir(card.children[1].hidden)
-      })
-    })
 
-*/
-Promise.all([requestUser(), requestCards()])
+function reqUser() {
+  return requestUser().then((res) => checkRes(res))
+}
+function reqCards() {
+  return requestCards().then((res) => checkRes(res))
+}
+Promise.all([reqUser(), reqCards()])
   .then(([user, cards]) => {
     namePlaceholder.textContent = user.name;
-    jobPlaceholder.textContent = user.about;   
+    jobPlaceholder.textContent = user.about;
     userAvatar.src = user.avatar;
     userId = user._id;
 
     cards.forEach(function (data) {
-      const firstOrder = false
-      const card  = createCard(data.name, data.link, data.likes, data._id, data.owner)
-
+      const firstOrder = false;
+      const card = createCard(data.name, data.link, data.likes, data._id, userId, data.owner._id)
       addCard(card, firstOrder)
-    });
+    })
   })
-  .catch((err) => {console.log(err)})
-  .finally(() => {console.log('Вжух')})
+  .catch((err) => { console.log(err) })
 
 
 popupProfile.addEventListener('submit', submitEditProfileForm);
@@ -95,43 +74,20 @@ popupProfileOpen.addEventListener('click', function () {
   jobInput.value = aboutFormProfile.textContent
   openPopup(popupProfile);
 });
-/*
-popupProfileClose.addEventListener('click', function () {
-  closePopup(popupProfile);
-});
-popupProfileSave.addEventListener('click', function () {
-  if (!nameInput.value == '' && !jobInput.value == '') {
-    closePopup(popupProfile);
-  }
-});
-*/
+
 popupAddOneCardOpen.addEventListener('click', function () {
   disableButton(popupAddOneCardSub, 'button-submit_inactive', 'button-submit_active')
   popupAddOneCardSub.textContent = 'Сохранить'
   formsCards.reset();
   openPopup(popupAddOneCard);
 });
-/*popupAddOneCardClose.addEventListener('click', function () {
-  formsCards.reset();
-  closePopup(popupAddOneCard);
-});
-popupViewImgClose.addEventListener('click', function () {
-  closePopup(popupViewImg);
-});
-*/
+
 avatar.addEventListener('click', function () {
   disableButton(popupAvatarBtn, 'button-submit_inactive', 'button-submit_active')
   formAvatar.reset();
   openPopup(popupAvatar);
 });
-/*popupAvatarBtn.addEventListener('click', function(){
-  closePopup(popupAvatar);
-})
 
-popupAvatarClose.addEventListener('click', function () {
-  closePopup(popupAvatar);
-});
-*/
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));

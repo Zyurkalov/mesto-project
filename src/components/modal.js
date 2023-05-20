@@ -1,5 +1,5 @@
-import {closePopup} from './utils.js'
-import {patchUserName, putchAvatar, checkRes} from './api.js'
+import { closePopup } from './utils.js'
+import { patchUserName, putchAvatar, checkRes } from './api.js'
 
 const popup = Array.from(document.querySelectorAll('.popup'))
 const popupProfile = document.querySelector('#popup-profile');
@@ -17,7 +17,7 @@ function closePopupEvtEsc(evt) {
   if (evt.key === 'Escape') {
     popup.forEach((popupElement) => {
       if (popupElement.classList.contains('popup_opened')) {
-      closePopup(popupElement)
+        closePopup(popupElement)
       }
     });
   }
@@ -31,40 +31,39 @@ function closePopupEvtClick(evt) {
 function submitEditProfileForm(evt) {
   evt.preventDefault();
   const { name, about } = evt.target.elements;
-
   evt.submitter.textContent = 'Сохранение...'
 
   patchUserName({
     name: name.value,
     about: about.value,
   })
-  .then((res) => checkRes(res))
-  .then((res) => { 
-    namePlaceholder.textContent = name.value; //новое значение
-    jobPlaceholder.textContent = about.value;   //новое значение
-    closePopup(popupProfile)
-  })
-  .finally(() => { 
-    evt.submitter.textContent = 'Сохранить';
-  })
+    .then((res) => checkRes(res))
+    .then((res) => {
+      namePlaceholder.textContent = name.value; //новое значение
+      jobPlaceholder.textContent = about.value;   //новое значение
+      closePopup(popupProfile)
+    })
+    .finally(() => {
+      evt.submitter.textContent = 'Сохранить';
+    })
 };
 function submitNewAvatar(evt) {
   evt.preventDefault();
   evt.submitter.textContent = 'Сохранение...'
-  const {avatar} = evt.target.elements;
+  const { avatar } = evt.target.elements;
 
   putchAvatar({
     avatar: avatar.value
   })
     .then((res) => checkRes(res))
-    .then((res) => { 
+    .then((res) => {
       userAvatar.src = avatar.value
       closePopup(popupAvatar)
     })
-    .finally(() => { 
+    .finally(() => {
       evt.submitter.textContent = 'Сохранить';
     })
   //updateAvatar({
   //avatar: avatar.value})
-} 
-export { closePopupEvtEsc, closePopupEvtClick, submitEditProfileForm, submitNewAvatar}
+}
+export { closePopupEvtEsc, closePopupEvtClick, submitEditProfileForm, submitNewAvatar }

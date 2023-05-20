@@ -1,5 +1,5 @@
 import {closePopup} from './utils.js'
-import {updateUserName, updateAvatar} from './api.js'
+import {patchUserName, putchAvatar, checkRes} from './api.js'
 
 const popup = Array.from(document.querySelectorAll('.popup'))
 const popupProfile = document.querySelector('#popup-profile');
@@ -31,20 +31,40 @@ function closePopupEvtClick(evt) {
 function submitEditProfileForm(evt) {
   evt.preventDefault();
   const { name, about } = evt.target.elements;
-  //console.log(evt.target.elements)
-  //console.log({ name, about })
+
   evt.submitter.textContent = 'Сохранение...'
-  updateUserName({
+
+  patchUserName({
     name: name.value,
     about: about.value,
+  })
+  .then((res) => checkRes(res))
+  .then((res) => { 
+    namePlaceholder.textContent = name.value; //новое значение
+    jobPlaceholder.textContent = about.value;   //новое значение
+    closePopup(popupProfile)
+  })
+  .finally(() => { 
+    evt.submitter.textContent = 'Сохранить';
   })
 };
 function submitNewAvatar(evt) {
   evt.preventDefault();
   evt.submitter.textContent = 'Сохранение...'
   const {avatar} = evt.target.elements;
-  //console.log({avatar})
-  updateAvatar({
-  avatar: avatar.value})
+
+  putchAvatar({
+    avatar: avatar.value
+  })
+    .then((res) => checkRes(res))
+    .then((res) => { 
+      userAvatar.src = avatar.value
+      closePopup(popupAvatar)
+    })
+    .finally(() => { 
+      evt.submitter.textContent = 'Сохранить';
+    })
+  //updateAvatar({
+  //avatar: avatar.value})
 } 
 export { closePopupEvtEsc, closePopupEvtClick, submitEditProfileForm, submitNewAvatar}

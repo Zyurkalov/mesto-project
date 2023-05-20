@@ -25,12 +25,22 @@ function checkRes(res) {
     return Promise.reject(`Что-то пошло не так: ${res.status}`);
   }
 }
-function getFetchCards() {
+/*
+function request(url, options) {
+  return fetch(url, options).then(checkRes)
+}
+
+function requestCards() {
+  return request(`${myConfig.adress}/cards`, {headers: myConfig.headers})
+}
+*/
+
+function requestCards() {
   return fetch(`${myConfig.adress}/cards`, {
     headers: myConfig.headers
   })
 }
-function getFetchUser() {
+function requestUser() {
   return fetch(`${myConfig.adress}/users/me`, {
     headers: myConfig.headers
   })
@@ -87,19 +97,14 @@ function deleteCard(cardId) {
 
 
 
-function postNewCard(card){
+/*
   getNewCard(card)
     .then((res) => checkRes(res))
     .then((data) => {
       //console.log(data) 
     })
-    .catch(() => {
-      console.log(`Что то не так c postNewCard${(card)}`)
-    })
-}
 
-function requestUser() {
-  getFetchUser()
+requestUser()
   .then((res) => checkRes(res))
   .then((user) => {
     //console.log(user._id)
@@ -107,36 +112,21 @@ function requestUser() {
     jobPlaceholder.textContent = user.about;   //новое значение
     userAvatar.src = user.avatar
   })
-  .catch(() => {
-    console.log('Что то не так c requestUser')
-  })
-}
 
-function updateUserName(user) {
   patchUserName(user)
     .then((res) => checkRes(res))
     .then((res) => { 
       namePlaceholder.textContent = user.name; //новое значение
       jobPlaceholder.textContent = user.about;   //новое значение
     })
-    .catch(() => {
-      console.log(`Что то не так c updateUserName${(user)}`)
-    })
-}
 
-function updateAvatar(user) {
   putchAvatar(user)
     .then((res) => checkRes(res))
     .then((res) => { 
       userAvatar.src = user.avatar
     })
-    .catch(() => {
-      console.log(`Что то не так c updateAvatar${(user)}`)
-    })
-}
 
-function requestCards() {
-  getFetchCards()
+  requestCards()
     .then((res) => checkRes(res))
     .then((res) => { 
       res.forEach((data) => { 
@@ -151,13 +141,7 @@ function requestCards() {
         //console.dir(card.children[1].hidden)
       })
     })
-    .catch(() => {
-      console.log('Что то не так c requestCards')
-    })
-}
-
-requestUser()
-requestCards()
-
-export {updateUserName, updateAvatar, postNewCard, deleteCard, likeCard, deleteLikeCard, checkRes, myId}
+*/
+export {deleteCard, likeCard, deleteLikeCard, 
+checkRes, myId, putchAvatar, patchUserName, getNewCard, requestUser, requestCards }
 

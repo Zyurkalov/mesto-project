@@ -1,7 +1,7 @@
 import { checkImage, loadCallback, errorCallback, openPopup, closePopup} from './utils.js'
 import {initialCards} from './constants.js'
 import {disableButton} from './validate.js'
-import {postNewCard, deleteCard, likeCard, deleteLikeCard, checkRes, liked, myId} from './api.js'
+import {postNewCard, deleteCard, likeCard, deleteLikeCard, checkRes, liked, myId, getNewCard} from './api.js'
 
 const photoGrid = document.querySelector('.photo-grid');
 const cardContent = document.querySelector('#card').content;
@@ -37,14 +37,12 @@ function createCard(place, image, likes, id, owner) {
       deleteLikeCard(id)
       .then((res) => checkRes(res))
         .then((res) => {
-
           const cardLike = res.likes.length;
           likeCount.textContent = cardLike;
           evt.target.classList.remove('card-mesto__desc-like_active')
         })
-        .catch(() => {
-          console.log(`Что то не так c pbuttonLike.DELETE`)
-        })
+        .catch((err) => {console.log(err)})
+        .finally(() => {})
     }else{
       likeCard(id)
       .then((res) => checkRes(res))
@@ -53,16 +51,20 @@ function createCard(place, image, likes, id, owner) {
           likeCount.textContent = cardLike;
           evt.target.classList.add('card-mesto__desc-like_active')
         })
-        .catch(() => {
-          console.log(`Что то не так c pbuttonLike.ADD`)
-        })
+        .catch((err) => {console.log(err)})
+        .finally(() => {})
       }
       });
 
   buttonTrash.addEventListener('click', function (evt) {
     const cardId = id
     deleteCard(cardId)
-    copiedCard.remove();
+      .then((res) => checkRes(res))
+      .then((data) => {
+        copiedCard.remove(); 
+      })
+      .catch((err) => {console.log(err)})
+      .finally(() => {})
   });
   imageCard.addEventListener('click', function (evt) {
     openPopup(popupViewImg)
@@ -80,14 +82,24 @@ function submitAddCardForm(evt) {
   evt.preventDefault();
   const { image, name } = evt.target.elements;
   evt.submitter.textContent = 'Сохранение...'
-  postNewCard({
+
+  getNewCard({
     image: image.value,
     name: name.value,
   })
-  closePopup(popupAddOneCard);
-  disableButton(submitOneCard)
-  
-  checkImage(imageInput.value, loadCallback, errorCallback)
+    .then((res) => checkRes(res))
+    .then((data) => {
+      console.log(data)
+      closePopup(popupAddOneCard);
+      disableButton(submitOneCard)
+      checkImage(imageInput.value, loadCallback, errorCallback)
+    })
+    .catch((err) => {console.log(err)})
+    .finally(() => {
+      evt.submitter.textContent = 'Сохранить'
+    })
+  //closePopup(popupAddOneCard);
+  //disableButton(submitOneCard)
 };
 
 export {createCard, addCard, submitAddCardForm, imageInput }

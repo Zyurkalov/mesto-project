@@ -1,9 +1,11 @@
 import './index.css';
-import { } from '../components/api.js'
-import { submitAddCardForm } from '../components/card.js'
+import { requestUser, requestCards, checkRes, myId} from '../components/api.js'
+import { submitAddCardForm, createCard, addCard } from '../components/card.js'
 import { enableValidation, disableButton } from '../components/validate.js'
 import { openPopup, closePopup,  } from '../components/utils.js'
 import { submitEditProfileForm, submitNewAvatar } from '../components/modal.js'
+
+let userId
 
 const formsCards = document.forms.card;
 const formsProfile = document.forms.profile;
@@ -16,6 +18,8 @@ const aboutFormProfile = profile.querySelector('.profile__about-me')
 const popupProfile = document.querySelector('#popup-profile');
 const nameInput = popupProfile.querySelector('#first-name');
 const jobInput = popupProfile.querySelector('#prof');
+
+const closeButtons = document.querySelectorAll('.popup__close-icon');
 const popupProfileClose = popupProfile.querySelector('.popup__close-icon');
 const popupProfileSave = popupProfile.querySelector('.button-submit');
 
@@ -33,9 +37,52 @@ const popupAvatarClose = popupAvatar.querySelector('.popup__close-icon')
 const avatar = profile.querySelector('.profile__avatar')
 const avatarInput = popupAvatar.querySelector('#image');
 
-//popupProfileSave.textContent = 'Сохранение...',
-//popupAddOneCardSub.textContent = 'Сохранение...',
-//popupAvatarBtn.textContent = 'Сохранение...',
+const namePlaceholder = profile.querySelector('.profile__name');
+const jobPlaceholder = profile.querySelector('.profile__about-me');
+const userAvatar = profile.querySelector('.profile__avatar')
+
+/*
+requestUser()
+.then((res) => checkRes(res))
+  .then((user) => {
+    //console.log(user._id)
+    namePlaceholder.textContent = user.name; //новое значение
+    jobPlaceholder.textContent = user.about;   //новое значение
+    userAvatar.src = user.avatar
+  })
+  
+requestCards()
+.then((res) => checkRes(res))
+    .then((res) => { 
+      res.forEach((data) => { 
+        //console.log(data.likes.length)
+        const firstOrder = false;
+        const card = createCard(data.name, data.link, data.likes, data._id, data.owner)
+        //if (data.owner._id !== userId) {
+        //  card.children[1].hidden = true
+        //}
+        addCard(card, firstOrder)
+        //console.dir(card.children[1].hidden)
+      })
+    })
+
+*/
+Promise.all([requestUser(), requestCards()])
+  .then(([user, cards]) => {
+    namePlaceholder.textContent = user.name;
+    jobPlaceholder.textContent = user.about;   
+    userAvatar.src = user.avatar;
+    userId = user._id;
+
+    cards.forEach(function (data) {
+      const firstOrder = false
+      const card  = createCard(data.name, data.link, data.likes, data._id, data.owner)
+
+      addCard(card, firstOrder)
+    });
+  })
+  .catch((err) => {console.log(err)})
+  .finally(() => {console.log('Вжух')})
 
 
 popupProfile.addEventListener('submit', submitEditProfileForm);
@@ -44,11 +91,11 @@ popupAvatar.addEventListener('submit', submitNewAvatar);
 
 popupProfileOpen.addEventListener('click', function () {
   disableButton(popupProfileSave, 'button-submit_inactive', 'button-submit_active')
-  popupProfileSave.textContent = 'Сохранить'
   nameInput.value = nameFormProfile.textContent
   jobInput.value = aboutFormProfile.textContent
   openPopup(popupProfile);
 });
+/*
 popupProfileClose.addEventListener('click', function () {
   closePopup(popupProfile);
 });
@@ -57,34 +104,39 @@ popupProfileSave.addEventListener('click', function () {
     closePopup(popupProfile);
   }
 });
-
+*/
 popupAddOneCardOpen.addEventListener('click', function () {
   disableButton(popupAddOneCardSub, 'button-submit_inactive', 'button-submit_active')
   popupAddOneCardSub.textContent = 'Сохранить'
   formsCards.reset();
   openPopup(popupAddOneCard);
 });
-popupAddOneCardClose.addEventListener('click', function () {
+/*popupAddOneCardClose.addEventListener('click', function () {
   formsCards.reset();
   closePopup(popupAddOneCard);
 });
 popupViewImgClose.addEventListener('click', function () {
   closePopup(popupViewImg);
 });
-
+*/
 avatar.addEventListener('click', function () {
   disableButton(popupAvatarBtn, 'button-submit_inactive', 'button-submit_active')
   formAvatar.reset();
-  popupAvatarBtn.textContent = 'Сохранить'
   openPopup(popupAvatar);
 });
-popupAvatarBtn.addEventListener('click', function(){
+/*popupAvatarBtn.addEventListener('click', function(){
   closePopup(popupAvatar);
 })
 
 popupAvatarClose.addEventListener('click', function () {
   closePopup(popupAvatar);
 });
+*/
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
+
 
 enableValidation({
   formSelector: '.popup__edit-value',

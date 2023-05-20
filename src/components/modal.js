@@ -31,8 +31,9 @@ function closePopupEvtClick(evt) {
 function submitEditProfileForm(evt) {
   evt.preventDefault();
   const { name, about } = evt.target.elements;
-  console.log(evt.target.elements)
-  console.log({ name, about })
+  //console.log(evt.target.elements)
+  //console.log({ name, about })
+  evt.submitter.textContent = 'Сохранение...'
   updateUserName({
     name: name.value,
     about: about.value,
@@ -40,9 +41,9 @@ function submitEditProfileForm(evt) {
 };
 function submitNewAvatar(evt) {
   evt.preventDefault();
-
+  evt.submitter.textContent = 'Сохранение...'
   const {avatar} = evt.target.elements;
-  console.log({avatar})
+  //console.log({avatar})
   updateAvatar({
   avatar: avatar.value})
 } 

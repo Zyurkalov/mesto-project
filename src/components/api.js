@@ -9,28 +9,36 @@ const avatarInput = popupAvatar.querySelector('#image');
 const userAvatar = profile.querySelector('.profile__avatar')
 
 const idKey = '237968ee-75dc-4a1c-917f-d4a72dcf6d28'
+const myId = '462e4876dc9bbf55564f6ab8'
 
+const myConfig = {
+  adress: 'https://nomoreparties.co/v1/plus-cohort-24',
+  headers: {
+    authorization: idKey,
+    'Content-Type': 'application/json',
+  }
+}
+function checkRes(res) {
+  if (res.ok) {
+    return res.json();
+  }else{
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
+  }
+}
 function getFetchCards() {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-24/cards', {
-    headers: {
-      authorization: idKey
-    }
+  return fetch(`${myConfig.adress}/cards`, {
+    headers: myConfig.headers
   })
 }
 function getFetchUser() {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-24/users/me', {
-    headers: {
-      authorization: idKey,
-    }
+  return fetch(`${myConfig.adress}/users/me`, {
+    headers: myConfig.headers
   })
 }
 function patchUserName(user){
-  return fetch('https://nomoreparties.co/v1/plus-cohort-24/users/me', {
+  return fetch(`${myConfig.adress}/users/me`, {
     method: 'PATCH',
-    headers: {
-      authorization: idKey,
-      'Content-Type': 'application/json',
-    },
+    headers: myConfig.headers,
     body: JSON.stringify({
       name: user.name,
       about: user.about,
@@ -38,12 +46,9 @@ function patchUserName(user){
   })
 }
 function putchAvatar(user) {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-24/users/me/avatar', {
+  return fetch(`${myConfig.adress}/users/me/avatar`, {
     method: 'PATCH',
-    headers: {
-      authorization: idKey,
-      'Content-Type': 'application/json',
-    },
+    headers: myConfig.headers,
     body: JSON.stringify({
       avatar: user.avatar,
     })
@@ -51,51 +56,53 @@ function putchAvatar(user) {
 }
 
 function getNewCard(card) {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-24/cards', {
+  return fetch(`${myConfig.adress}/cards`, {
     method: 'POST',
-    headers: {
-      authorization: idKey,
-      'Content-Type': 'application/json',
-    },
+    headers: myConfig.headers,
     body: JSON.stringify({
       name: card.name,
       link: card.image,
     }),
   })
 }
-///////////////////////////////////
-///////////////////////////////////
+function likeCard(cardId) {
+  return fetch(`${myConfig.adress}/cards/likes/${cardId}`, {
+    method: 'PUT',
+    headers: myConfig.headers,
+})
+} 
+function deleteLikeCard(cardId) {
+  return fetch(`${myConfig.adress}/cards/likes/${cardId}`, {
+    method: 'DELETE',
+    headers: myConfig.headers,
+})
+} 
+
+function deleteCard(cardId) {
+  return fetch(`${myConfig.adress}/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: myConfig.headers,
+})
+}
+
+
 
 function postNewCard(card){
   getNewCard(card)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }else{
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => checkRes(res))
     .then((data) => {
-      print('получилось?') 
+      //console.log(data) 
     })
     .catch(() => {
-      console.log('Что то не так c postNewCard')
+      console.log(`Что то не так c postNewCard${(card)}`)
     })
 }
 
-///////////////////////////////////
-///////////////////////////////////
-
 function requestUser() {
   getFetchUser()
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }else{
-      return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    }
-  })
+  .then((res) => checkRes(res))
   .then((user) => {
+    //console.log(user._id)
     namePlaceholder.textContent = user.name; //новое значение
     jobPlaceholder.textContent = user.about;   //новое значение
     userAvatar.src = user.avatar
@@ -105,60 +112,43 @@ function requestUser() {
   })
 }
 
-
-
 function updateUserName(user) {
   patchUserName(user)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }else{
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => checkRes(res))
     .then((res) => { 
       namePlaceholder.textContent = user.name; //новое значение
       jobPlaceholder.textContent = user.about;   //новое значение
     })
     .catch(() => {
-      console.log('Что то не так c updateUser')
+      console.log(`Что то не так c updateUserName${(user)}`)
     })
 }
 
-
 function updateAvatar(user) {
   putchAvatar(user)
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }else{
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => checkRes(res))
     .then((res) => { 
       userAvatar.src = user.avatar
     })
     .catch(() => {
-      console.log('Что то не так c updateAvatar')
+      console.log(`Что то не так c updateAvatar${(user)}`)
     })
 }
 
 function requestCards() {
   getFetchCards()
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }else{
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      }
-    })
+    .then((res) => checkRes(res))
     .then((res) => { 
       res.forEach((data) => { 
-
         //console.log(data.likes.length)
         const firstOrder = false;
-        const card = createCard(data.name, data.link)
+        const card = createCard(data.name, data.link, data.likes, data._id, data.owner)
+
+        if (data.owner._id !== myId) {
+          card.children[1].hidden = true
+        }
         addCard(card, firstOrder)
+        //console.dir(card.children[1].hidden)
       })
     })
     .catch(() => {
@@ -166,8 +156,8 @@ function requestCards() {
     })
 }
 
-
-requestCards()
 requestUser()
-export {updateUserName, updateAvatar, postNewCard}
+requestCards()
+
+export {updateUserName, updateAvatar, postNewCard, deleteCard, likeCard, deleteLikeCard, checkRes, myId}
 

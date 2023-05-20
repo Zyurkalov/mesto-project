@@ -19,7 +19,9 @@ function loadCallback() {
   const image = imageInput.value;
   const firstOrder = true;
 
-  const card = createCard(place, image)
+  const likes = []
+  const id = false
+  const card = createCard(place, image, likes, id)
   addCard(card, firstOrder)
 }
 
@@ -28,7 +30,9 @@ function errorCallback() {
   const place = placeInput.value;
   const firstOrder = true;
 
-  const card = createCard(place, image)
+  const likes = []
+  const id = false
+  const card = createCard(place, image, likes, id)
   addCard(card, firstOrder)
 }
 

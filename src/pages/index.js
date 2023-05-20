@@ -13,7 +13,6 @@ const profile = document.querySelector('.profile');
 const nameFormProfile = profile.querySelector('.profile__name')
 const aboutFormProfile = profile.querySelector('.profile__about-me')
 
-
 const popupProfile = document.querySelector('#popup-profile');
 const nameInput = popupProfile.querySelector('#first-name');
 const jobInput = popupProfile.querySelector('#prof');
@@ -34,6 +33,10 @@ const popupAvatarClose = popupAvatar.querySelector('.popup__close-icon')
 const avatar = profile.querySelector('.profile__avatar')
 const avatarInput = popupAvatar.querySelector('#image');
 
+//popupProfileSave.textContent = 'Сохранение...',
+//popupAddOneCardSub.textContent = 'Сохранение...',
+//popupAvatarBtn.textContent = 'Сохранение...',
+
 
 popupProfile.addEventListener('submit', submitEditProfileForm);
 popupAddOneCard.addEventListener('submit', submitAddCardForm);
@@ -41,6 +44,7 @@ popupAvatar.addEventListener('submit', submitNewAvatar);
 
 popupProfileOpen.addEventListener('click', function () {
   disableButton(popupProfileSave, 'button-submit_inactive', 'button-submit_active')
+  popupProfileSave.textContent = 'Сохранить'
   nameInput.value = nameFormProfile.textContent
   jobInput.value = aboutFormProfile.textContent
   openPopup(popupProfile);
@@ -56,6 +60,7 @@ popupProfileSave.addEventListener('click', function () {
 
 popupAddOneCardOpen.addEventListener('click', function () {
   disableButton(popupAddOneCardSub, 'button-submit_inactive', 'button-submit_active')
+  popupAddOneCardSub.textContent = 'Сохранить'
   formsCards.reset();
   openPopup(popupAddOneCard);
 });
@@ -69,7 +74,8 @@ popupViewImgClose.addEventListener('click', function () {
 
 avatar.addEventListener('click', function () {
   disableButton(popupAvatarBtn, 'button-submit_inactive', 'button-submit_active')
-  //formAvatar.reset();
+  formAvatar.reset();
+  popupAvatarBtn.textContent = 'Сохранить'
   openPopup(popupAvatar);
 });
 popupAvatarBtn.addEventListener('click', function(){

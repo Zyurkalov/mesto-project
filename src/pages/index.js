@@ -57,7 +57,7 @@ Promise.all([reqUser(), reqCards()])
 
     cards.forEach(function (data) {
       const firstOrder = false;
-      const card = createCard(data.name, data.link, data.likes, data._id, userId, data.owner._id)
+      const card = createCard(data.name, data.link, data.likes, data._id, data.owner._id, userId)
       addCard(card, firstOrder)
     })
   })

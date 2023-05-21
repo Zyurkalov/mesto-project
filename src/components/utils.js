@@ -13,15 +13,18 @@ function checkImage(url, imageFound, imageNotFound) {
   tester.onload = imageFound;
   tester.onerror = imageNotFound;
 }
-
+/*
 function loadCallback() {
   const place = placeInput.value;
   const image = imageInput.value;
   const firstOrder = true;
 
   const likes = []
-  const id = false
-  const card = createCard(place, image, likes, id)
+  const id = '0'
+  const userId = '0'
+  const otherId = '0'
+  const card = createCard(place, image, likes, id, userId, otherId)
+  console.log(card.value)
   addCard(card, firstOrder)
 }
 
@@ -31,11 +34,14 @@ function errorCallback() {
   const firstOrder = true;
 
   const likes = []
-  const id = false
-  const card = createCard(place, image, likes, id)
+  const id = '0'
+  const userId = '0'
+  const otherId = '0'
+  const card = createCard(place, image, likes, id, userId, otherId)
+  console.log(card.value)
   addCard(card, firstOrder)
 }
-
+*/
 function openPopup(namePopup) {
   namePopup.classList.add('popup_opened');
   body.addEventListener('keydown', closePopupEvtEsc)
@@ -52,4 +58,4 @@ function closePopup(namePopup) {
   buttonSubElement.classList.add(inactiveClass);
   buttonSubElement.classList.remove(activeClass);
 }*/
-export {checkImage, loadCallback, errorCallback, openPopup, closePopup}
+export {checkImage, openPopup, closePopup}

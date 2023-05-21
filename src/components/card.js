@@ -1,4 +1,4 @@
-import { checkImage, loadCallback, errorCallback, openPopup, closePopup } from './utils.js'
+import { openPopup, closePopup } from './utils.js'
 import { disableButton } from './validate.js'
 import { postNewCard, deleteCard, likeCard, deleteLikeCard, checkRes, liked, getNewCard } from './api.js'
 
@@ -13,23 +13,28 @@ const popupAddOneCard = document.querySelector('#popup-newCard');
 const imageInput = popupAddOneCard.querySelector('#image');
 const submitOneCard = popupAddOneCard.querySelector('.button-submit')
 
-function createCard(place, image, likes, id, userId, otherId) {
+function createCard(place, image, likes, id, userId, myId) {
   const copiedCard = templateCard.cloneNode(true);
   const buttonLike = copiedCard.querySelector('.card-mesto__desc-like');
   const buttonTrash = copiedCard.querySelector('.card-mesto__trash');
   const imageCard = copiedCard.querySelector('.card-mesto__img');
   const likeCount = copiedCard.querySelector('.card-mesto__like-count');
+  console.log(myId)
 
   copiedCard.querySelector('.card-mesto__desc-header').textContent = place;
   imageCard.alt = place;
   imageCard.src = image;
   likeCount.textContent = likes.length
 
-  if (otherId !== userId) {
+  if (userId !== myId) {
     buttonTrash.hidden = true
   }
+  if (myId === true ) {
+    buttonTrash.hidden = false
+  }
+
   likes.forEach(function (user) {
-    if (user._id === userId) {
+    if (user._id === myId) {
       buttonLike.classList.add('card-mesto__desc-like_active')
     }
   })
@@ -60,6 +65,7 @@ function createCard(place, image, likes, id, userId, otherId) {
 
   buttonTrash.addEventListener('click', function (evt) {
     const cardId = id
+
     deleteCard(cardId)
       .then((res) => checkRes(res))
       .then((data) => {
@@ -91,9 +97,14 @@ function submitAddCardForm(evt) {
   })
     .then((res) => checkRes(res))
     .then((data) => {
+      console.log(data)
+      //checkImage(imageInput.value, loadCallback, errorCallback)
+      const firstOrder = true;
+      const card = createCard(data.name, data.link, data.likes, data._id, data.owner._id, true)
+      addCard(card, firstOrder)
+
       closePopup(popupAddOneCard);
       disableButton(submitOneCard)
-      checkImage(imageInput.value, loadCallback, errorCallback)
     })
     .catch((err) => { console.log(err) })
     .finally(() => {

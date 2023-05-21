@@ -97,7 +97,7 @@ function submitAddCardForm(evt) {
   })
     .then((res) => checkRes(res))
     .then((data) => {
-      console.log(data)
+      
       //checkImage(imageInput.value, loadCallback, errorCallback)
       const firstOrder = true;
       const card = createCard(data.name, data.link, data.likes, data._id, data.owner._id, true)
